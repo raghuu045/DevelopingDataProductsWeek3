@@ -1,0 +1,38 @@
+---
+title: "Deleloping Data Products Week 3 Assignment"
+author: "Raghu"
+date: "January 22, 2017"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Code for the plot
+```{r ,echo = TRUE, eval=FALSE}
+suppressPackageStartupMessages(library(plotly))
+data("JohnsonJohnson")
+numOfYear <- length(JohnsonJohnson)/frequency(JohnsonJohnson)
+yearQuarter <- c("Qtr1","Qtr2","Qtr3","Qtr4")
+stocks <- as.data.frame(time(JohnsonJohnson)) 
+        %>% mutate(price=JohnsonJohnson,
+                   quarter = rep(yearQuarter, numOfYear))
+colnames(stocks) <- c("Year","price","Quarter")
+plot_ly(stocks,x=~Year,y=~price,color=~Quarter,
+        type = "scatter", mode = "lines")
+```
+
+
+## Quaterly Earnings per Johnson & Johnson Share
+
+```{r ,echo = FALSE}
+suppressPackageStartupMessages(library(plotly))
+data("JohnsonJohnson")
+numOfYear <- length(JohnsonJohnson)/frequency(JohnsonJohnson)
+yearQuarter <- c("Qtr1","Qtr2","Qtr3","Qtr4")
+stocks <- as.data.frame(time(JohnsonJohnson)) %>% mutate(price=JohnsonJohnson, quarter = rep(yearQuarter, numOfYear))
+colnames(stocks) <- c("Year","price","Quarter")
+plot_ly(stocks,x=~Year,y=~price,color=~Quarter,
+        type = "scatter", mode = "lines")
+```
